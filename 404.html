@@ -40,7 +40,7 @@
 				jsonObject = XLSX.utils.sheet_to_row_object_array(jsonObject);
 				const pathName = window.location.pathname;
 				for (const obj of jsonObject) {
-					if (`/${obj['Original']}` === pathName) {
+					if (`/${obj['Hash']}` === pathName) {
 						window.location.replace(jsonObject['Original']);
 					}
 				}
