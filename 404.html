@@ -41,7 +41,7 @@
 				const pathName = window.location.pathname;
 				for (const obj of jsonObject) {
 					if (`/${obj['Hash']}` === pathName) {
-						return window.location.replace(jsonObject['Original']);
+						return window.location.replace(obj['Original']);
 					}
 				}
 
