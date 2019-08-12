@@ -29,20 +29,22 @@
 				xhr.send(null);
 			},
 			onSpreadsheetLoad: function(e, $this) {
-				var data = xhr.responseText;
-				var f = new File([], 'sample.xlsx', {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
-				var reader = new FileReader();
-				reader.onload = (e) => {
-					$this.parseSpreadsheetData(e, data);
-				};
-				reader.readAsBinaryString(f);
+				var data = e.target.responseText;
+				$this.parseSpreadsheetData(data);
 			},
-			parseSpreadsheetData: function(event, data) {
+			parseSpreadsheetData: function(data) {
 				var workbook = XLSX.read(data, {type: 'binary'});
 				var sheetName = workbook.SheetNames[0];
 				var jsonObject = workbook.Sheets[sheetName];
 				jsonObject = XLSX.utils.sheet_to_row_object_array(jsonObject);
-				console.log(jsonObject);
+				for (const obj of jsonObject) {
+					const pathName = window.location.pathname;
+					if (`/${jsonObject['Original']}` === pathName) {
+						window.location.replace(jsonObject['Original']);
+					}
+				}
+
+				window.location.replace('https://pablomontenegro.com.br/');
 			},
   		},
   	});
